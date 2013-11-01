@@ -63,9 +63,9 @@
 %% subject to the condition that this copyright notice and permission
 %% notice shall be included in all copies or substantial portions of
 %% the Materials.
-%% 
+%%
 %% @headerfile "../include/cl.hrl"
-%% 
+%%
 -module(cl).
 
 -on_load(init/0).
@@ -111,7 +111,7 @@
 -export([create_image2d/7]).
 -export([create_image3d/9]).
 
-%% Sampler 
+%% Sampler
 -export([create_sampler/4]).
 -export([release_sampler/1]).
 -export([retain_sampler/1]).
@@ -209,7 +209,7 @@ init() ->
 %% @spec start([start_arg()]) -> 'ok' | {'error', term()}
 %%
 %% @doc Start the OpenCL application
-%% 
+%%
 -spec start(Args::[start_arg()]) -> 'ok' | {'error', term()}.
 
 start(_Args) ->
@@ -224,7 +224,7 @@ start(_Args) ->
 %%
 -spec start() -> 'ok' | {'error', term()}.
 
-start() -> 
+start() ->
     start([]).
 
 %%
@@ -236,7 +236,7 @@ start() ->
 %%
 -spec stop() -> 'ok' | {'error', term()}.
 
-stop()  -> 
+stop()  ->
     ok.
 
 %%
@@ -270,7 +270,7 @@ versions() ->
 %%    'profile' | 'name' | 'vendor' | 'extensions'.
 
 -type cl_platform_info_key() ::
-	'profile' | 'name' | 'vendor' | 'extensions'.
+        'profile' | 'name' | 'vendor' | 'extensions'.
 %%
 %% @type cl_platform_info() =
 %%      {'profile',string()} |
@@ -292,7 +292,7 @@ versions() ->
 %% @doc Obtain the list of platforms available.
 -spec get_platform_ids() ->
     {'ok',[cl_platform_id()]} | {'error', cl_error()}.
-    
+
 get_platform_ids() ->
     erlang:error(nif_not_loaded).
 %%
@@ -310,8 +310,8 @@ platform_info() ->
      extensions].
 
 %%
-%% @spec get_platform_info(Platform :: cl_platform_id(), 
-%%			Info :: cl_platform_info_key()) ->
+%% @spec get_platform_info(Platform :: cl_platform_id(),
+%%                         Info :: cl_platform_info_key()) ->
 %%    {'ok',term()} | {'error', cl_error()}
 %% @doc Get specific information about the OpenCL platform.
 %% <dl>
@@ -320,7 +320,7 @@ platform_info() ->
 %%
 %% <dt>vendor</dt>   <dd>Platform vendor string.</dd>
 %%
-%% <dt>profile</dt>  
+%% <dt>profile</dt>
 %%        <dd> OpenCL profile string. Returns the profile name
 %%        supported by the implementation. The profile name returned
 %%        can be one of the following strings:
@@ -333,16 +333,16 @@ platform_info() ->
 %%        embedded profile. The embedded profile is defined to be a subset for
 %%        each version of OpenCL.</dd>
 %%
-%% <dt>version</dt>   
+%% <dt>version</dt>
 %%       <dd>OpenCL version string. Returns the OpenCL version supported by the implementation.</dd>
 %%
 %% <dt>extensions</dt> <dd>Returns a space-separated list of extension
 %% names (the extension names themselves do not contain any spaces)
 %% supported by the platform. Extensions defined here must be
-%% supported by all devices associated with this platform. </dd> 
+%% supported by all devices associated with this platform. </dd>
 %%</dl>
--spec get_platform_info(Platform :: cl_platform_id(), 
-			Info :: cl_platform_info_key()) ->
+-spec get_platform_info(Platform :: cl_platform_id(),
+                        Info :: cl_platform_info_key()) ->
     {'ok',term()} | {'error', cl_error()}.
 
 get_platform_info(_Platform, _Info) ->
@@ -383,9 +383,9 @@ get_platform_info(Platform) when ?is_platform(Platform) ->
 %%  'preferred_vector_width_int' | 'preferred_vector_width_long' |
 %%  'preferred_vector_width_float' | 'preferred_vector_width_double' |
 %%  'max_clock_frequency' | 'address_bits' | 'max_read_image_args' |
-%%  'max_write_image_args' | 'max_mem_alloc_size' | 
+%%  'max_write_image_args' | 'max_mem_alloc_size' |
 %%  'image2d_max_width' | 'image2d_max_height' | 'image3d_max_width' |
-%%  'image3d_max_height' | 'image3d_max_depth' | 
+%%  'image3d_max_height' | 'image3d_max_depth' |
 %%  'image_support' |
 %%  'max_parameter_size' | 'max_samplers' |
 %%  'mem_base_addr_align' | 'min_data_type_align_size' |
@@ -405,9 +405,9 @@ get_platform_info(Platform) when ?is_platform(Platform) ->
  'preferred_vector_width_int' | 'preferred_vector_width_long' |
  'preferred_vector_width_float' | 'preferred_vector_width_double' |
  'max_clock_frequency' | 'address_bits' | 'max_read_image_args' |
- 'max_write_image_args' | 'max_mem_alloc_size' | 
+ 'max_write_image_args' | 'max_mem_alloc_size' |
  'image2d_max_width' | 'image2d_max_height' | 'image3d_max_width' |
- 'image3d_max_height' | 'image3d_max_depth' | 
+ 'image3d_max_height' | 'image3d_max_depth' |
  'image_support' |
  'max_parameter_size' | 'max_samplers' |
  'mem_base_addr_align' | 'min_data_type_align_size' |
@@ -431,7 +431,7 @@ get_platform_info(Platform) when ?is_platform(Platform) ->
 %% @equiv get_devive_ids(0,all)
 %%
 -spec get_device_ids() -> {'ok',[cl_device_id()]} | {'error',cl_error()}.
-    
+
 get_device_ids() ->
     get_device_ids(undefined, all).
 
@@ -443,14 +443,14 @@ get_device_ids() ->
 %%
 %% Refers to the platform ID returned by <c>get_platform_ids</c> or can be
 %% NULL. If platform is NULL, the behavior is implementation-defined. </dd>
-%% 
+%%
 %% <dt>Type</dt> <dd>
-%% 
+%%
 %% A list that identifies the type of OpenCL device. The
 %% device_type can be used to query specific OpenCL devices or all
 %% OpenCL devices available. </dd>
 %%
-%% </dl> 
+%% </dl>
 %%
 %%  get_device_ids/2 may return all or a subset of the actual
 %%  physical devices present in the platform and that match
@@ -471,20 +471,19 @@ get_device_ids(_Platform, _Type) ->
 %% @doc Return a list of possible device info queries.
 %% @see get_device_info/2
 -spec device_info() -> [cl_device_info_key()].
-    
+
 device_info() ->
     lists:foldl(
-      fun({1,2},Acc) -> device_info_12(Acc);
-	 ({1,1},Acc) -> device_info_11(Acc);
-	 ({1,0},Acc) -> device_info_10(Acc);
-	 (_, Acc) -> Acc
+      fun ({1,2},Acc) -> device_info_12(Acc);
+          ({1,1},Acc) -> device_info_11(Acc);
+          ({1,0},Acc) -> device_info_10(Acc);
+          (_, Acc) -> Acc
       end, [], versions()).
 
-	
 device_info_10(L) ->
     [
-     type, 
-     vendor_id, 
+     type,
+     vendor_id,
      max_compute_units,
      max_work_item_dimensions,
      max_work_group_size,
@@ -572,7 +571,7 @@ device_info_12(L) ->
 %% @spec get_device_info(DevID::cl_device_id(), Info::cl_device_info_key()) ->
 %%   {'ok', term()} | {'error', cl_error()}
 %% @doc Get information about an OpenCL device.
-%% 
+%%
 %% <dl> <dt>'type' </dt> <dd> <p>The OpenCL device type. Currently
 %% supported values are one of or a combination of: CL_DEVICE_TYPE_CPU,
 %% CL_DEVICE_TYPE_GPU, CL_DEVICE_TYPE_ACCELERATOR, or
@@ -592,7 +591,7 @@ device_info_12(L) ->
 %% <dt>'max_work_group_size'</dt> <dd> <p>Maximum number of
 %% work-items in a work-group executing a kernel using the data parallel
 %% execution model. (@see enqueue_nd_range_kernel/5). The minimum value
-%% is 1.</p> </dd> 
+%% is 1.</p> </dd>
 %%
 %% <dt>'max_work_item_sizes'</dt> <dd> <p>Maximum number of work-items
 %% that can be specified in each dimension of the work-group to enqueue_nd_range_kernel/5.</p>
@@ -800,7 +799,7 @@ get_device_info(Device) ->
 %% @type cl_context_info_key() = {'reference_count' | 'devices' | 'properties'}
 -type cl_context_info_key() :: {'reference_count' | 'devices' | 'properties'}.
 
-%% @type cl_context_info() = 
+%% @type cl_context_info() =
 %%  { {'reference_count', cl_uint()},
 %%    {'devices', [cl_device()]},
 %%    {'properties', [cl_int()]} }
@@ -837,13 +836,13 @@ create_context(_DeviceList) ->
 %%
 %% @spec create_context_from_type(Type::cl_device_types())->
 %%    {'ok', cl_context()} | {'error', cl_error()}
-%% @doc Create an OpenCL context from a device type that identifies the specific device(s) to use. 
+%% @doc Create an OpenCL context from a device type that identifies the specific device(s) to use.
 %%
-%% NOTE: 
+%% NOTE:
 %% create_context_from_type/1 may return all or a subset of the
 %% actual physical devices present in the platform and that match
 %% device_type.
-%% 
+%%
 %% create_context/1 and create_context_from_type/1 perform an
 %% implicit retain. This is very helpful for 3rd party libraries,
 %% which typically get a context passed to them by the
@@ -857,17 +856,17 @@ create_context(_DeviceList) ->
 
 create_context_from_type(Type) ->
     case get_device_ids(undefined, Type) of
-	{ok,DeviceList} ->
-	    create_context(DeviceList);
-	Error ->
-	    Error
+        {ok,DeviceList} ->
+            create_context(DeviceList);
+        Error ->
+            Error
     end.
 
 %%
 %% @spec release_context(Context::cl_context()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Decrement the context reference count. 
-%% 
+%% @doc Decrement the context reference count.
+%%
 %% After the context reference count becomes zero and all the objects
 %% attached to context (such as memory objects, command-queues) are
 %% released, the context is deleted.
@@ -880,7 +879,7 @@ release_context(Context) when ?is_context(Context) ->
 %%
 %% @spec retain_context(Context::cl_context()) ->
 %%     'ok' | {'error', cl_error()}
-%% @doc Increment the context reference count. 
+%% @doc Increment the context reference count.
 %% @see create_context
 -spec retain_context(Context::cl_context()) ->
     'ok' | {'error', cl_error()}.
@@ -897,19 +896,19 @@ context_info() ->
     [
      reference_count,
      devices,
-     properties 
+     properties
     ].
 %%
 %% @spec get_context_info(Context::cl_context(),Info::cl_context_info_key()) ->
 %%   {'ok', term()} | {'error', cl_error()}
-%% @doc  Query information about a context. 
+%% @doc  Query information about a context.
 %%
 %% <dl> <dt>reference_count</dt> <dd> Return the context reference
 %% count. The reference count returned should be considered
 %% immediately stale. It is unsuitable for general use in
 %% applications. This feature is provided for identifying memory
 %% leaks. </dd>
-%% 
+%%
 %% <dt>devices</dt> <dd>Return the list of devices in context.</dd>
 %%
 %% <dt>properties</dt> <dd>Return the context properties.</dd>
@@ -933,31 +932,31 @@ get_context_info(Context) when ?is_context(Context) ->
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Command Queue (Queue)
-%% @type cl_queue_property() = { 'out_of_order_exec_mode_enable' | 
-%%			         'profiling_enabled' }
+%% @type cl_queue_property() = { 'out_of_order_exec_mode_enable' |
+%%                               'profiling_enabled' }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--type cl_queue_property() :: { 'out_of_order_exec_mode_enable' | 
-			       'profiling_enabled' }.
+-type cl_queue_property() :: { 'out_of_order_exec_mode_enable' |
+                               'profiling_enabled' }.
 %%
 %% @spec create_queue(Context::cl_context(),Device::cl_device_id(),
 %%                    Properties::[cl_queue_property()]) ->
 %%    {'ok', cl_queue()} | {'error', cl_error()}
 %% @doc Create a command-queue on a specific device.
 %%
-%% <dl> 
+%% <dl>
 %% <dt>'out_of_order_exec_mode_enable'</dt> <dd> Determines
 %% whether the commands queued in the command-queue are executed
 %% in-order or out-of-order. If set, the commands in the command-queue
 %% are executed out-of-order. Otherwise, commands are executed
 %% in-order.</dd>
-%% 
+%%
 %% <dt>'profiling_enabled'</dt> <dd> Enable or disable profiling of
 %% commands in the command-queue. If set, the profiling of commands is
 %% enabled. Otherwise profiling of commands is disabled. See
 %% clGetEventProfilingInfo for more information.
 %% </dd>
 %% </dl>
-%% 
+%%
 %% The OpenCL functions that are submitted to a command-queue are
 %% enqueued in the order the calls are made but can be configured to
 %% execute in-order or out-of-order. The properties argument in
@@ -1014,7 +1013,7 @@ get_context_info(Context) when ?is_context(Context) ->
 %% enqueued that must complete before reads or writes to the memory
 %% object(s) occur.
 -spec create_queue(Context::cl_context(),Device::cl_device_id(),
-		   Properties::[cl_queue_property()]) ->
+                   Properties::[cl_queue_property()]) ->
     {'ok', cl_queue()} | {'error', cl_error()}.
 
 create_queue(_Context, _Device, _Properties) ->
@@ -1094,8 +1093,8 @@ get_queue_info(Queue) when ?is_queue(Queue) ->
 %%                         'copy_host_ptr'}
 %%
 -type cl_mem_flag() :: { 'read_write' | 'write_only' | 'read_only' |
-			 'use_host_ptr' | 'alloc_host_ptr' |
-			 'copy_host_ptr'}.
+                         'use_host_ptr' | 'alloc_host_ptr' |
+                         'copy_host_ptr'}.
 
 %%
 %% @spec create_buffer(Context::cl_context(),Flags::cl_mem_flags(),
@@ -1103,9 +1102,9 @@ get_queue_info(Queue) when ?is_queue(Queue) ->
 %%    {'ok', cl_mem()} | {'error', cl_error()}
 %%
 %% @equiv create_buffer(Context,Flags,Size,<<>>)
-%%    
+%%
 -spec create_buffer(Context::cl_context(),Flags::[cl_mem_flag()],
-		    Size::non_neg_integer()) ->
+                    Size::non_neg_integer()) ->
     {'ok', cl_mem()} | {'error', cl_error()}.
 
 create_buffer(Context,Flags,Size) ->
@@ -1115,10 +1114,10 @@ create_buffer(Context,Flags,Size) ->
 %% @spec create_buffer(Context::cl_context(),Flags::[cl_mem_flag()],
 %%                      Size::non_neg_integer(), Data::binary()) ->
 %%    {'ok', cl_mem()} | {'error', cl_error()}
-%% @doc  Creates a buffer object. 
-%% 
+%% @doc  Creates a buffer object.
+%%
 -spec create_buffer(Context::cl_context(),Flags::[cl_mem_flag()],
-		    Size::non_neg_integer(),Data::binary()) ->
+                    Size::non_neg_integer(),Data::binary()) ->
     {'ok', cl_mem()} | {'error', cl_error()}.
 
 create_buffer(_Context,_Flags,_Size,_Data) ->
@@ -1127,7 +1126,7 @@ create_buffer(_Context,_Flags,_Size,_Data) ->
 %%
 %% @spec release_mem_object(Mem::cl_mem()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc  Decrements the memory object reference count. 
+%% @doc  Decrements the memory object reference count.
 %%
 %% After the memobj reference count becomes zero and commands queued
 %% for execution on a command-queue(s) that use memobj have finished,
@@ -1141,7 +1140,7 @@ release_mem_object(Mem) when ?is_mem(Mem) ->
 %%
 %% @spec retain_mem_object(Mem::cl_mem()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Increments the memory object reference count. 
+%% @doc Increments the memory object reference count.
 -spec retain_mem_object(Mem::cl_mem()) ->
     'ok' | {'error', cl_error()}.
 
@@ -1149,9 +1148,9 @@ retain_mem_object(Mem) when ?is_mem(Mem) ->
     ok.
 
 
--type cl_mem_info_key() :: 
-	'object_type' | 'flags' | 'size' | 'host_ptr' | 'map_count' |
-	'reference_count' | 'context'.
+-type cl_mem_info_key() ::
+        'object_type' | 'flags' | 'size' | 'host_ptr' | 'map_count' |
+        'reference_count' | 'context'.
 
 
 %%
@@ -1224,9 +1223,9 @@ get_image_info(Mem) when ?is_mem(Mem) ->
 %%
 %% @spec create_sampler(Context::cl_context(),Normalized::boolean(),
 %%                      AddressingMode::cl_addressing_mode(),
-%%                      FilterMode::cl_filter_mode()) -> 
+%%                      FilterMode::cl_filter_mode()) ->
 %%    {'ok', cl_sampler()} | {'error', cl_error()}
-%% @doc Creates a sampler object. 
+%% @doc Creates a sampler object.
 %%
 %%  A sampler object describes how to sample an image when the image
 %%  is read in the kernel. The built-in functions to read from an
@@ -1237,8 +1236,8 @@ get_image_info(Mem) when ?is_mem(Mem) ->
 %%  section we discuss how sampler objects are created using OpenCL
 %%  functions.
 -spec create_sampler(Context::cl_context(),Normalized::boolean(),
-		     AddressingMode::cl_addressing_mode(),
-		     FilterMode::cl_filter_mode()) -> 
+                     AddressingMode::cl_addressing_mode(),
+                     FilterMode::cl_filter_mode()) ->
     {'ok', cl_sampler()} | {'error', cl_error()}.
 
 create_sampler(_Context, _Normalized, _AddressingMode, _FilterMode) ->
@@ -1247,7 +1246,7 @@ create_sampler(_Context, _Normalized, _AddressingMode, _FilterMode) ->
 %%
 %% @spec release_sampler(Sampler::cl_sampler()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Decrements the sampler reference count. 
+%% @doc Decrements the sampler reference count.
 %%
 %%  The sampler object is deleted after the reference count becomes
 %%  zero and commands queued for execution on a command-queue(s) that
@@ -1261,7 +1260,7 @@ release_sampler(Sampler) when ?is_sampler(Sampler) ->
 %%
 %% @spec retain_sampler(Sampler::cl_sampler()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Increments the sampler reference count. 
+%% @doc Increments the sampler reference count.
 -spec retain_sampler(Sampler::cl_sampler()) ->
     'ok' | {'error', cl_error()}.
 
@@ -1277,15 +1276,15 @@ sampler_info() ->
      filter_mode
     ].
 
-%% @spec get_sampler_info(Sampler::cl_sampler(), InfoType::cl_sampler_info_type()) -> 
+%% @spec get_sampler_info(Sampler::cl_sampler(), InfoType::cl_sampler_info_type()) ->
 %%    {'ok', term()} | {'error', cl_error()}
-%% @doc Returns <c>InfoType</c> information about the sampler object. 
+%% @doc Returns <c>InfoType</c> information about the sampler object.
 get_sampler_info(_Sampler, _Info) ->
     erlang:error(nif_not_loaded).
 
 
 %% @spec get_sampler_info(Sampler::cl_sampler()) -> {'ok', term()} | {'error', cl_error()}
-%% @doc Returns all information about the sampler object. 
+%% @doc Returns all information about the sampler object.
 %% @see get_sampler_info/2
 get_sampler_info(Sampler) ->
     get_info_list(Sampler, sampler_info(), fun get_sampler_info/2).
@@ -1299,10 +1298,10 @@ get_sampler_info(Sampler) ->
 %%                                  Source::iodata()) ->
 %%    {'ok', cl_program()} | {'error', cl_error()}
 %%
-%% @doc Creates a program object for a context, 
+%% @doc Creates a program object for a context,
 %% and loads the source code specified by the text strings in the
 %% strings array into the program object.
-%% 
+%%
 %%  The devices associated with the program object are the devices associated with context.
 
 %% OpenCL allows applications to create a program object using the
@@ -1329,8 +1328,8 @@ get_sampler_info(Sampler) ->
 %% @todo allow iodata and handle multiple binaries in the driver
 %%
 -spec create_program_with_source(Context::cl_context(),
-				 Source::iodata()) ->
-    {'ok', cl_program()} | {'error', cl_error()}.
+                                 Source::iodata()) ->
+                                        {'ok', cl_program()} | {'error', cl_error()}.
 
 create_program_with_source(_Context, _Source) ->
     erlang:error(nif_not_loaded).
@@ -1341,8 +1340,8 @@ create_program_with_source(_Context, _Source) ->
 %%                                  BinaryList::[binary()]) ->
 %%    {'ok', cl_program()} | {'error', cl_error()}
 %%
-%% @doc  Creates a program object for a context, and loads specified binary data into the program object. 
-%% 
+%% @doc  Creates a program object for a context, and loads specified binary data into the program object.
+%%
 %% OpenCL allows applications to create a program object using the
 %% program source or binary and build appropriate program
 %% executables. This allows applications to determine whether they
@@ -1366,8 +1365,8 @@ create_program_with_source(_Context, _Source) ->
 %%  </code>
 %%
 -spec create_program_with_binary(Context::cl_context(),
-				 DeviceList::[cl_device_id()],
-				 BinaryList::[binary()]) ->
+                                 DeviceList::[cl_device_id()],
+                                 BinaryList::[binary()]) ->
     {'ok', cl_program()} | {'error', cl_error()}.
 
 create_program_with_binary(_Context, _DeviceList, _BinaryList) ->
@@ -1376,14 +1375,14 @@ create_program_with_binary(_Context, _DeviceList, _BinaryList) ->
 %%
 %% @spec retain_program(Program::cl_program()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc  Increments the program reference count. 
+%% @doc  Increments the program reference count.
 retain_program(Program) when ?is_program(Program) ->
     ok.
 
 %%
 %% @spec release_program(Program::cl_program()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Decrements the program reference count. 
+%% @doc Decrements the program reference count.
 %%
 %% The program object is deleted after all kernel objects associated
 %% with program have been deleted and the program reference count
@@ -1401,14 +1400,14 @@ release_program(Program) when ?is_program(Program) ->
 %% program source or binary.
 %%
 %% OpenCL allows program executables to be built using the source or the binary.
-%% 
+%%
 %% The build options are categorized as pre-processor options, options
 %% for math intrinsics, options that control optimization and
 %% miscellaneous options. This specification defines a standard set of
 %% options that must be supported by an OpenCL compiler when building
 %% program executables online or offline. These may be extended by a
 %% set of vendor- or platform-specific options.
-%% 
+%%
 %% <h4>Preprocessor Options</h4> These options
 %% control the OpenCL preprocessor which is run on each program source
 %% before actual compilation. -D options are processed in the order
@@ -1418,7 +1417,7 @@ release_program(Program) when ?is_program(Program) ->
 %% <dl>
 %% <dt><span>-D name</span></dt><dd>
 %% <p> Predefine <code>name</code> as a macro, with definition 1.</p></dd>
-%% <dt>-D name=definition</dt><dd><p> The contents of <code>definition</code> 
+%% <dt>-D name=definition</dt><dd><p> The contents of <code>definition</code>
 %% are tokenized and processed as if they appeared during translation phase three in a `#define'
 %% directive. In particular, the definition will be truncated by
 %% embedded newline characters.  </p></dd>
@@ -1446,7 +1445,7 @@ release_program(Program) when ?is_program(Program) ->
 %% ignored for double precision numbers if the device does not support
 %% double precision or if it does support double precison but
 %% CL_FP_DENORM bit is not set in CL_DEVICE_DOUBLE_FP_CONFIG.  </p><p>
-%% 
+%%
 %% This flag only applies for scalar and vector single precision
 %% floating-point variables and computations on these floating-point
 %% variables inside a program. It does not apply to reading from or
@@ -1490,13 +1489,13 @@ release_program(Program) when ?is_program(Program) ->
 %% double-precision floating-point, and edge case behavior in section
 %% 7.5. This option includes the -cl-no-signed-zeros and
 %% -cl-mad-enable options.  </p></dd>
-%%<dt><span class="term">-cl-finite-math-only</span></dt><dd><p> 
+%%<dt><span class="term">-cl-finite-math-only</span></dt><dd><p>
 %% Allow optimizations for floating-point arithmetic that assume that arguments and results
 %% are not NaNs or ±infinity. This option may violate the OpenCL numerical compliance
 %% requirements defined in in section 7.4 for single-precision floating-point,
 %% section 9.3.9 for double-precision floating-point, and edge case behavior in section 7.5.
 %% </p></dd>
-%%<dt><span class="term">-cl-fast-relaxed-math</span></dt><dd><p> 
+%%<dt><span class="term">-cl-fast-relaxed-math</span></dt><dd><p>
 %% Sets the optimization options -cl-finite-math-only and -cl-unsafe-math-optimizations.
 %% This allows optimizations for floating-point arithmetic that may violate the IEEE 754
 %% standard and the OpenCL numerical compliance requirements defined in the specification in section 7.4 for single-precision floating-point, section 9.3.9 for double-precision floating-point,
@@ -1509,22 +1508,22 @@ release_program(Program) when ?is_program(Program) ->
 %% but which are risky or suggest there may have been an error. The following languageindependent
 %% options do not enable specific warnings but control the kinds of diagnostics
 %% produced by the OpenCL compiler.
-%% <dl><dt><span class="term">-w</span></dt><dd><p> 
+%% <dl><dt><span class="term">-w</span></dt><dd><p>
 %% Inhibit all warning messages.
-%% </p></dd><dt><span class="term">-Werror</span></dt><dd><p> 
+%% </p></dd><dt><span class="term">-Werror</span></dt><dd><p>
 %% Make all warnings into errors.
 %% </p></dd>
 %%</dl>
 
 build_program(Program, DeviceList, Options) ->
     case async_build_program(Program, DeviceList, Options) of
-	{ok,Ref} ->
-	    receive
-		{cl_async,Ref,Reply} ->
-		    Reply
-	    end;
-	Error ->
-	    Error
+        {ok,Ref} ->
+            receive
+                {cl_async,Ref,Reply} ->
+                    Reply
+            end;
+        Error ->
+            Error
     end.
 
 async_build_program(_Program, _DeviceList, _Options) ->
@@ -1533,14 +1532,14 @@ async_build_program(_Program, _DeviceList, _Options) ->
 
 %%
 %% @spec unload_compiler() -> 'ok' | {'error', cl_error()}
-%% @doc Allows the implementation to release the resources allocated by the OpenCL compiler. 
+%% @doc Allows the implementation to release the resources allocated by the OpenCL compiler.
 %%
 %% This is a hint from the application and does not guarantee that the
 %% compiler will not be used in the future or that the compiler will
 %% actually be unloaded by the implementation. Calls to build_program/3
 %% after unload_compiler/0 will reload the compiler, if necessary, to
 %% build the appropriate program executable.
-unload_compiler() ->   
+unload_compiler() ->
     erlang:error(nif_not_loaded).
 
 %% @spec unload_platform_compiler(Platform :: cl_platform_id()) ->
@@ -1561,11 +1560,11 @@ program_info() ->
      binaries
     ].
 
-%% @doc  Returns specific information about the program object. 
+%% @doc  Returns specific information about the program object.
 get_program_info(_Program, _Info) ->
     erlang:error(nif_not_loaded).
 
-%% @doc  Returns all information about the program object. 
+%% @doc  Returns all information about the program object.
 get_program_info(Program) when ?is_program(Program) ->
     get_info_list(Program, program_info(), fun get_program_info/2).
 
@@ -1576,16 +1575,16 @@ program_build_info() ->
      log
     ].
 
-%% @doc Returns specific build information for each device in the program object. 
+%% @doc Returns specific build information for each device in the program object.
 get_program_build_info(_Program, _Device, _Info) ->
     erlang:error(nif_not_loaded).
 
-%% @doc Returns all build information for each device in the program object. 
+%% @doc Returns all build information for each device in the program object.
 get_program_build_info(Program, Device) ->
     get_info_list(Program, program_build_info(),
-		  fun(P, I) ->
-			  get_program_build_info(P, Device, I)
-		  end).
+                  fun (P, I) ->
+                          get_program_build_info(P, Device, I)
+                  end).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Kernel
@@ -1595,7 +1594,7 @@ get_program_build_info(Program, Device) ->
 %% @spec create_kernel(Program::cl_program(),Name::string()) ->
 %%    {'ok', cl_kernel()} | {'error', cl_error()}
 %%
-%% @doc  Creates a kernal object. 
+%% @doc  Creates a kernal object.
 %%
 %%  A kernel is a function declared in a program. A kernel is
 %%  identified by the __kernel qualifier applied to any function in a
@@ -1609,7 +1608,7 @@ create_kernel(_Program, _Name) ->
 %% @spec create_kernels_in_program(Program::cl_program()) ->
 %%    {'ok', [cl_kernel()]} | {'error', cl_error()}
 %%
-%% @doc Creates kernel objects for all kernel functions in a program object. 
+%% @doc Creates kernel objects for all kernel functions in a program object.
 %%
 %%  Creates kernel objects for all kernel functions in program. Kernel
 %%  objects are not created for any __kernel functions in program that
@@ -1674,14 +1673,14 @@ set_kernel_arg_size(_Kernel,_Index,_Size) ->
 %%
 %% @spec retain_kernel(Context::cl_kernel()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc  Increments the program kernel reference count. 
+%% @doc  Increments the program kernel reference count.
 retain_kernel(Kernel) when ?is_kernel(Kernel) ->
     ok.
 
 %%
 %% @spec release_kernel(Context::cl_kernel()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc  Decrements the kernel reference count. 
+%% @doc  Decrements the kernel reference count.
 release_kernel(Kernel) when ?is_kernel(Kernel) ->
     ok.
 
@@ -1694,11 +1693,11 @@ kernel_info() ->
      program
     ].
 
-%% @doc Returns specific information about the kernel object. 
+%% @doc Returns specific information about the kernel object.
 get_kernel_info(_Kernel, _Info) ->
     erlang:error(nif_not_loaded).
 
-%% @doc Returns all information about the kernel object. 
+%% @doc Returns all information about the kernel object.
 get_kernel_info(Kernel) when ?is_kernel(Kernel) ->
     get_info_list(Kernel, kernel_info(), fun get_kernel_info/2).
 
@@ -1718,9 +1717,9 @@ get_kernel_workgroup_info(_Kernel, _Device, _Info) ->
 %% specific to a device.
 get_kernel_workgroup_info(Kernel, Device) ->
     get_info_list(Kernel, kernel_workgroup_info(),
-		  fun(K,I) ->
-			  get_kernel_workgroup_info(K,Device,I)
-		  end).
+                  fun (K,I) ->
+                          get_kernel_workgroup_info(K,Device,I)
+                  end).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Events
@@ -1730,19 +1729,19 @@ get_kernel_workgroup_info(Kernel, Device) ->
 %%                    WaitList::[cl_event()]) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 %%
-%% @doc Enqueues a command to execute a kernel on a device. 
+%% @doc Enqueues a command to execute a kernel on a device.
 %%
 %% The kernel is executed using a single work-item.
 %% @see enqueue_nd_range_kernel/5
 -spec enqueue_task(Queue::cl_queue(), Kernel::cl_kernel(),
-		   WaitList::[cl_event()]) ->
+                   WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 
 enqueue_task(Queue, Kernel, WaitList) ->
     enqueue_task(Queue, Kernel, WaitList, true).
 
 -spec nowait_enqueue_task(Queue::cl_queue(), Kernel::cl_kernel(),
-		   WaitList::[cl_event()]) ->
+                          WaitList::[cl_event()]) ->
     'ok' | {'error', cl_error()}.
 
 nowait_enqueue_task(Queue, Kernel, WaitList) ->
@@ -1758,8 +1757,8 @@ enqueue_task(_Queue, _Kernel, _WaitList, _WantEvent) ->
 %%                               WaitList::[cl_event()]) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 %%
-%% @doc Enqueues a command to execute a kernel on a device. 
-%% 
+%% @doc Enqueues a command to execute a kernel on a device.
+%%
 %% Work-group instances are executed in parallel across multiple
 %% compute units or concurrently on the same compute unit.
 %%
@@ -1772,9 +1771,9 @@ enqueue_task(_Queue, _Kernel, _WaitList, _WantEvent) ->
 %% kernel, is computed using the value given by local_work_size. The
 %% starting local ID is always (0, 0, ... 0).
 -spec enqueue_nd_range_kernel(Queue::cl_queue(), Kernel::cl_kernel(),
-			      Global::[non_neg_integer()],
-			      Local::[non_neg_integer()],
-			      WaitList::[cl_event()]) ->
+                              Global::[non_neg_integer()],
+                              Local::[non_neg_integer()],
+                              WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 
 
@@ -1783,22 +1782,22 @@ enqueue_nd_range_kernel(Queue, Kernel, Global, Local, WaitList) ->
 
 
 -spec nowait_enqueue_nd_range_kernel(Queue::cl_queue(), Kernel::cl_kernel(),
-				     Global::[non_neg_integer()],
-				     Local::[non_neg_integer()],
-				     WaitList::[cl_event()]) ->
+                                     Global::[non_neg_integer()],
+                                     Local::[non_neg_integer()],
+                                     WaitList::[cl_event()]) ->
     'ok' | {'error', cl_error()}.
 
 nowait_enqueue_nd_range_kernel(Queue, Kernel, Global, Local, WaitList) ->
     enqueue_nd_range_kernel(Queue, Kernel, Global, Local, WaitList, false).
 
-enqueue_nd_range_kernel(_Queue, _Kernel, _Global, _Local, _WaitList, 
-			_WantEvent) ->
+enqueue_nd_range_kernel(_Queue, _Kernel, _Global, _Local, _WaitList,
+                        _WantEvent) ->
     erlang:error(nif_not_loaded).
 
 %% @spec enqueue_marker(Queue::cl_queue()) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 %%
-%% @doc  Enqueues a marker command. 
+%% @doc  Enqueues a marker command.
 %%
 %%  Enqueues a marker command to command_queue. The marker command
 %%  returns an event which can be used to queue a wait on this marker
@@ -1814,11 +1813,11 @@ enqueue_marker(_Queue) ->
 %% @spec enqueue_wait_for_events(Queue::cl_queue(), WaitList::[cl_event()]) ->
 %%    'ok' | {'error', cl_error()}
 %%
-%% @doc Enqueues a wait for a specific event or a list of events 
+%% @doc Enqueues a wait for a specific event or a list of events
 %% to complete before any future commands queued in the command-queue are
 %% executed.
 %%
-%% The context associated with events in WaitList and Queue must be the same. 
+%% The context associated with events in WaitList and Queue must be the same.
 -spec enqueue_wait_for_events(Queue::cl_queue(),  WaitList::[cl_event()]) ->
     'ok' | {'error', cl_error()}.
 
@@ -1827,13 +1826,13 @@ enqueue_wait_for_events(_Queue, _WaitList) ->
 
 %%
 %% @spec enqueue_read_buffer(Queue::cl_queue(), Buffer::cl_mem(),
-%%                           Offset::non_neg_integer(), 
-%%                           Size::non_neg_integer(), 
+%%                           Offset::non_neg_integer(),
+%%                           Size::non_neg_integer(),
 %%                           WaitList::[cl_event()]) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 %%
-%% @doc Enqueue commands to read from a buffer object to host memory. 
-%% 
+%% @doc Enqueue commands to read from a buffer object to host memory.
+%%
 %% Calling <code>enqueue_read_buffer</code> to read a region of the
 %% buffer object with the <code>Buffer</code> argument value set to
 %% <code>host_ptr</code> + <code >offset</code>, where
@@ -1850,9 +1849,9 @@ enqueue_wait_for_events(_Queue, _WaitList) ->
 %% </ul>
 
 -spec enqueue_read_buffer(Queue::cl_queue(), Buffer::cl_mem(),
-			  Offset::non_neg_integer(), 
-			  Size::non_neg_integer(), 
-			  WaitList::[cl_event()]) ->
+                          Offset::non_neg_integer(),
+                          Size::non_neg_integer(),
+                          WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 
 enqueue_read_buffer(_Queue, _Buffer, _Offset, _Size, _WaitList) ->
@@ -1860,14 +1859,14 @@ enqueue_read_buffer(_Queue, _Buffer, _Offset, _Size, _WaitList) ->
 
 %%
 %% @spec enqueue_write_buffer(Queue::cl_queue(), Buffer::cl_mem(),
-%%                            Offset::non_neg_integer(), 
-%%                            Size::non_neg_integer(), 
+%%                            Offset::non_neg_integer(),
+%%                            Size::non_neg_integer(),
 %%                            Data::binary(),
 %%                            WaitList::[cl_event()]) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 %%
-%% @doc Enqueue commands to write to a buffer object from host memory. 
-%% 
+%% @doc Enqueue commands to write to a buffer object from host memory.
+%%
 %% Calling <code>enqueue_write_buffer</code> to update the latest bits
 %% in a region of the buffer object with the <code>Buffer</code>
 %% argument value set to <code>host_ptr</code> + <code >offset</code>,
@@ -1878,15 +1877,15 @@ enqueue_read_buffer(_Queue, _Buffer, _Offset, _Size, _WaitList) ->
 %%
 %% <ul> <li>The host memory region given by <code>(host_ptr + offset, cb)</code>
 %% contains the latest bits when the enqueued write command begins
-%% execution. </li> 
-%% <li>The buffer object is not mapped</li> 
+%% execution. </li>
+%% <li>The buffer object is not mapped</li>
 %% <li>The buffer object is not used by any command-queue until the read
 %% command has finished execution</li> </ul>
 -spec enqueue_write_buffer(Queue::cl_queue(), Buffer::cl_mem(),
-			   Offset::non_neg_integer(), 
-			   Size::non_neg_integer(), 
-			   Data::binary(),
-			   WaitList::[cl_event()]) ->
+                           Offset::non_neg_integer(),
+                           Size::non_neg_integer(),
+                           Data::binary(),
+                           WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 
 
@@ -1894,24 +1893,24 @@ enqueue_write_buffer(Queue, Buffer, Offset, Size, Data, WaitList) ->
     enqueue_write_buffer(Queue, Buffer, Offset, Size, Data, WaitList, true).
 
 -spec nowait_enqueue_write_buffer(Queue::cl_queue(), Buffer::cl_mem(),
-			   Offset::non_neg_integer(), 
-			   Size::non_neg_integer(), 
-			   Data::binary(),
-			   WaitList::[cl_event()]) ->
-    'ok' | {'error', cl_error()}.
+                                  Offset::non_neg_integer(),
+                                  Size::non_neg_integer(),
+                                  Data::binary(),
+                                  WaitList::[cl_event()]) ->
+                                         'ok' | {'error', cl_error()}.
 
 nowait_enqueue_write_buffer(Queue, Buffer, Offset, Size, Data, WaitList) ->
     enqueue_write_buffer(Queue, Buffer, Offset, Size, Data, WaitList, false).
 
 enqueue_write_buffer(_Queue, _Buffer, _Offset, _Size, _Data, _WaitList,
-		     _WantEvent) ->
+                     _WantEvent) ->
     erlang:error(nif_not_loaded).
 
-%% 
+%%
 %% @spec enqueue_barrier(Queue::cl_queue()) ->
 %%    'ok' | {'error', cl_error()}
 %%
-%% @doc A synchronization point that enqueues a barrier operation. 
+%% @doc A synchronization point that enqueues a barrier operation.
 %%
 %%  enqueue_barrier/1 is a synchronization point that ensures that all
 %%  queued commands in command_queue have finished execution before
@@ -1927,40 +1926,39 @@ enqueue_barrier(_Queue) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 
 -spec enqueue_marker_with_wait_list(Queue::cl_queue(),
-				    WaitList::[cl_event()]) ->
+                                    WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 
 enqueue_marker_with_wait_list(_Queue, _WaitList) ->
-    erlang:error(nif_not_loaded).    
+    erlang:error(nif_not_loaded).
 
 %% @spec enqueue_barrier_with_wait_list(Queue::cl_queue(),
 %%                    WaitList::[cl_event()]) ->
 %%    {'ok', cl_event()} | {'error', cl_error()}
 -spec enqueue_barrier_with_wait_list(Queue::cl_queue(),
-				     WaitList::[cl_event()]) ->
+                                     WaitList::[cl_event()]) ->
     {'ok', cl_event()} | {'error', cl_error()}.
 enqueue_barrier_with_wait_list(_Queue, _WaitList) ->
     erlang:error(nif_not_loaded).
-    
 
 
 enqueue_read_image(_Queue, _Image, _Origin, _Region, _RowPitch, _SlicePitch,
-		   _WaitList) ->
+                   _WaitList) ->
     erlang:error(nif_not_loaded).
 
 enqueue_write_image(Queue, Image, Origin, Region, RowPitch, SlicePitch,
-		    Data, WaitList) ->
+                    Data, WaitList) ->
     enqueue_write_image(Queue, Image, Origin, Region, RowPitch, SlicePitch,
-			Data, WaitList, true).
+                        Data, WaitList, true).
 
 
 nowait_enqueue_write_image(Queue, Image, Origin, Region, RowPitch, SlicePitch,
-			   Data, WaitList) ->
+                           Data, WaitList) ->
     enqueue_write_image(Queue, Image, Origin, Region, RowPitch, SlicePitch,
-			Data, WaitList, false).
+                        Data, WaitList, false).
 
 enqueue_write_image(_Queue, _Image, _Origin, _Region, _RowPitch, _SlicePitch,
-		    _Data, _WaitList, _WantEvent) ->
+                    _Data, _WaitList, _WantEvent) ->
     erlang:error(nif_not_loaded).
 
 
@@ -1968,27 +1966,27 @@ enqueue_copy_image(_QUeue, _SrcImage, _DstImage, _Origin, _Region, _WaitList) ->
     erlang:error(nif_not_loaded).
 
 enqueue_copy_image_to_buffer(_Queue, _SrcImage, _DstBuffer, _Origin, _Region,
-			     _DstOffset, _WaitList) ->
+                             _DstOffset, _WaitList) ->
     erlang:error(nif_not_loaded).
 
 enqueue_copy_buffer_to_image(_Queue, _SrcBuffer, _DstImage, _SrcOffset,
-			     _DstOrigin, _Region, _WaitList) ->
+                             _DstOrigin, _Region, _WaitList) ->
     erlang:error(nif_not_loaded).
 
-enqueue_map_buffer(_Queue, _Buffer, _MapFlags, _Offset, _Size, _WaitList) ->    
+enqueue_map_buffer(_Queue, _Buffer, _MapFlags, _Offset, _Size, _WaitList) ->
     erlang:error(nif_not_loaded).
 
 enqueue_map_image(_Queue, _Image, _MapFlags, _Origin, _Region, _WaitList) ->
     erlang:error(nif_not_loaded).
 
-enqueue_unmap_mem_object(_Queue, _Mem, _WaitList) ->    
+enqueue_unmap_mem_object(_Queue, _Mem, _WaitList) ->
     erlang:error(nif_not_loaded).
 
 %%
 %% @spec flush(Queue::cl_queue()) ->
 %%    'ok' | {'error', cl_error()}
 %%
-%% @doc Issues all previously queued OpenCL commands 
+%% @doc Issues all previously queued OpenCL commands
 %% in a command-queue to the device associated with the command-queue.
 %%
 %% flush only guarantees that all queued commands to command_queue get
@@ -1999,12 +1997,12 @@ enqueue_unmap_mem_object(_Queue, _Mem, _WaitList) ->
 
 flush(Queue) ->
     case async_flush(Queue) of
-	{ok,Ref} ->
-	    receive
-		{cl_async,Ref,Reply} ->
-		    Reply
-	    end;
-	Error -> Error
+        {ok,Ref} ->
+            receive
+                {cl_async,Ref,Reply} ->
+                    Reply
+            end;
+        Error -> Error
     end.
 
 async_flush(_Queue) ->
@@ -2014,7 +2012,7 @@ async_flush(_Queue) ->
 %% @spec finish(Queue::cl_queue()) ->
 %%    'ok' | {'error', cl_error()}
 %%
-%% @doc Blocks until all previously queued OpenCL commands 
+%% @doc Blocks until all previously queued OpenCL commands
 %% in a command-queue are issued to the associated device and have
 %% completed.
 %%
@@ -2026,12 +2024,12 @@ async_flush(_Queue) ->
 
 finish(Queue) ->
     case async_finish(Queue) of
-	{ok,Ref} ->
-	    receive
-		{cl_async,Ref,Reply} ->
-		    Reply
-	    end;
-	Error -> Error
+        {ok,Ref} ->
+            receive
+                {cl_async,Ref,Reply} ->
+                    Reply
+            end;
+        Error -> Error
     end.
 
 async_finish(_Queue) ->
@@ -2040,15 +2038,15 @@ async_finish(_Queue) ->
 %%
 %% @spec retain_event(Event::cl_event()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc  Increments the event reference count. 
-%% NOTE: The OpenCL commands that return an event perform an implicit retain. 
+%% @doc  Increments the event reference count.
+%% NOTE: The OpenCL commands that return an event perform an implicit retain.
 retain_event(Event) when ?is_event(Event) ->
     ok.
 
 %%
 %% @spec release_event(Event::cl_event()) ->
 %%    'ok' | {'error', cl_error()}
-%% @doc Decrements the event reference count. 
+%% @doc Decrements the event reference count.
 %%
 %%  Decrements the event reference count. The event object is deleted
 %%  once the reference count becomes zero, the specific command
@@ -2067,12 +2065,12 @@ event_info() ->
      execution_status
     ].
 
-%% @doc Returns specific information about the event object. 
+%% @doc Returns specific information about the event object.
 get_event_info(_Event, _Info) ->
     erlang:error(nif_not_loaded).
 
 
-%% @doc Returns all specific information about the event object. 
+%% @doc Returns all specific information about the event object.
 get_event_info(Event) when ?is_event(Event) ->
     get_info_list(Event, event_info(), fun get_event_info/2).
 
@@ -2089,21 +2087,21 @@ create_image(_Context, _MemFlags, _ImageFormat, _ImageDesc, _Data) ->
 %% _ImageFormat = {image_channel_order, image_channel_data_type}
 %% fixme make into record!
 create_image2d(_Context, _MemFlags, _ImageFormat, _Width, _Height, _Picth,
-		_Data) ->
+               _Data) ->
     erlang:error(nif_not_loaded).
 
 create_image3d(_Context, _MemFlags, _ImageFormat, _Width, _Height, _Depth,
-	       _RowPicth, _SlicePitch, _Data) ->
+               _RowPicth, _SlicePitch, _Data) ->
     erlang:error(nif_not_loaded).
-    
+
 %%
-%% @spec wait(Event::cl_event) -> 
+%% @spec wait(Event::cl_event) ->
 %%    {'ok','completed'} | {'ok',Binary} | {'error',cl_error()}
 %%
 wait(Event) ->
     wait(Event, infinity).
 
-%% @spec wait_for_event(Event::cl_event) -> 
+%% @spec wait_for_event(Event::cl_event) ->
 %%    {'ok','completed'} | {'ok',Binary} | {'error',cl_error()}
 %% @equiv wait(Event, infinity)
 %%
@@ -2111,13 +2109,13 @@ wait(Event) ->
 wait_for_event(Event) ->
     wait(Event, infinity).
 
-%%  
-%% @spec wait(Event::cl_event, Timeout::timeout()) -> 
-%%    {'ok','completed'} | {'ok',Binary} | 
-%%    {'error',cl_error()} | {'error',timeout}
-%% 
 %%
-%% @doc  Waits for commands identified by event objects to complete. 
+%% @spec wait(Event::cl_event, Timeout::timeout()) ->
+%%    {'ok','completed'} | {'ok',Binary} |
+%%    {'error',cl_error()} | {'error',timeout}
+%%
+%%
+%% @doc  Waits for commands identified by event objects to complete.
 %%
 %%  Waits for commands identified by event objects
 %%  in event_list to complete. A command is considered complete if its
@@ -2126,29 +2124,29 @@ wait_for_event(Event) ->
 
 wait(Event, Timeout) when ?is_event(Event) ->
     case async_wait_for_event(Event) of
-	{ok,Ref} ->
-	    wait1(Ref,Event,Timeout);
-	Error ->
-	    Error
+        {ok,Ref} ->
+            wait1(Ref,Event,Timeout);
+        Error ->
+            Error
     end.
 
 wait1(Ref, Event, Timeout) when ?is_event(Event) ->
     receive
-	{cl_event, Ref, Binary} when is_binary(Binary) ->
-	    release_event(Event),
-	    {ok,Binary};
-	{cl_event, Ref, complete} ->
-	    release_event(Event),
-	    {ok,completed};
-	{cl_event, Ref, Err} ->
-	    release_event(Event),
-	    Err
+        {cl_event, Ref, Binary} when is_binary(Binary) ->
+            release_event(Event),
+            {ok,Binary};
+        {cl_event, Ref, complete} ->
+            release_event(Event),
+            {ok,completed};
+        {cl_event, Ref, Err} ->
+            release_event(Event),
+            Err
     after Timeout ->
-	    {error, timeout}
+            {error, timeout}
     end.
 
-%%  
-%% @spec async_wait_for_event(Event::cl_event()) -> 
+%%
+%% @spec async_wait_for_event(Event::cl_event()) ->
 %%    {'ok',reference()} | {'error',cl_error()}
 %%
 %% @doc  Initiate an asynchronous wait operation.
@@ -2176,11 +2174,11 @@ get_info_list(Object, InfoList, Fun) ->
 
 get_info_list(Object, [I|Is], Fun, Err, Acc) ->
     case Fun(Object, I) of
-	{error,Reason} ->
-	    io:format("InfoError: ~s [~p]\n", [I,Reason]),
-	    get_info_list(Object, Is, Fun, Reason, Acc);
-	{ok,Value} ->
-	    get_info_list(Object, Is, Fun, Err, [{I,Value}|Acc])
+        {error,Reason} ->
+            io:format("InfoError: ~s [~p]\n", [I,Reason]),
+            get_info_list(Object, Is, Fun, Reason, Acc);
+        {ok,Value} ->
+            get_info_list(Object, Is, Fun, Err, [{I,Value}|Acc])
     end;
 get_info_list(_Object,[], _Fun, undefined, []) ->
     {ok, []};

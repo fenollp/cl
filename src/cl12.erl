@@ -111,8 +111,8 @@
 
 init() ->
     case lists:member({1,2}, cl:versions()) of
-	false -> erlang:error(cl_1_2_not_supported);
-	true -> ok
+        false -> erlang:error(cl_1_2_not_supported);
+        true -> ok
     end.
 
 start(Args) ->  cl:start(Args).
@@ -185,20 +185,20 @@ get_kernel_info(A1,A2) -> cl:get_kernel_info(A1,A2).
 kernel_workgroup_info() -> cl:kernel_workgroup_info().
 get_kernel_workgroup_info(A1,A2) -> cl:get_kernel_workgroup_info(A1,A2).
 get_kernel_workgroup_info(A1,A2,A3) -> cl:get_kernel_workgroup_info(A1,A2,A3).
-enqueue_task(A1,A2,A3) -> cl:enqueue_task(A1,A2,A3). 
+enqueue_task(A1,A2,A3) -> cl:enqueue_task(A1,A2,A3).
 enqueue_task(A1,A2,A3,A4) -> cl:enqueue_task(A1,A2,A3,A4).
 nowait_enqueue_task(A1,A2,A3) -> cl:nowait_enqueue_task(A1,A2,A3).
-enqueue_nd_range_kernel(A1,A2,A3,A4,A5) -> 
+enqueue_nd_range_kernel(A1,A2,A3,A4,A5) ->
     cl:enqueue_nd_range_kernel(A1,A2,A3,A4,A5).
 enqueue_nd_range_kernel(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_nd_range_kernel(A1,A2,A3,A4,A5,A6).
 nowait_enqueue_nd_range_kernel(A1,A2,A3,A4,A5) ->
     cl:nowait_enqueue_nd_range_kernel(A1,A2,A3,A4,A5).
-enqueue_marker_with_wait_list(A1,A2) -> 
+enqueue_marker_with_wait_list(A1,A2) ->
     cl:enqueue_marker_with_wait_list(A1,A2).
 enqueue_barrier_with_wait_list(A1,A2) ->
     cl:enqueue_barrier_with_wait_list(A1,A2).
-enqueue_wait_for_events(A1,A2) -> 
+enqueue_wait_for_events(A1,A2) ->
     cl:enqueue_wait_for_events(A1,A2).
 enqueue_read_buffer(A1,A2,A3,A4,A5) ->
     cl:enqueue_read_buffer(A1,A2,A3,A4,A5).
@@ -233,9 +233,9 @@ retain_event(A1) -> cl:retain_event(A1).
 event_info() -> cl:event_info().
 get_event_info(A1) -> cl:get_event_info(A1).
 get_event_info(A1,A2) -> cl:get_event_info(A1,A2).
-wait(A1) -> cl:wait(A1). 
+wait(A1) -> cl:wait(A1).
 wait(A1,A2) -> cl:wait(A1,A2).
-async_flush(A1) -> cl:async_flush(A1). 
+async_flush(A1) -> cl:async_flush(A1).
 flush(A1) -> cl:flush(A1).
 async_finish(A1) -> cl:async_finish(A1).
 finish(A1) -> cl:finish(A1).

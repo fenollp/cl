@@ -60,7 +60,7 @@
 -export([create_image2d/7]).
 -export([create_image3d/9]).
 
-%% Sampler 
+%% Sampler
 -export([create_sampler/4]).
 -export([release_sampler/1]).
 -export([retain_sampler/1]).
@@ -123,8 +123,8 @@
 
 init() ->
     case lists:member({1,0}, cl:versions()) of
-	false -> erlang:error(cl_1_0_not_supported);
-	true -> ok
+        false -> erlang:error(cl_1_0_not_supported);
+        true -> ok
     end.
 
 start(Args) ->  cl:start(Args).
@@ -163,11 +163,11 @@ get_mem_object_info(A1,A2) -> cl:get_mem_object_info(A1,A2).
 image_info() -> cl:image_info().
 get_image_info(A1) -> cl:get_image_info(A1).
 get_image_info(A1,A2) -> cl:get_image_info(A1,A2).
-get_supported_image_formats(A1,A2,A3) -> 
+get_supported_image_formats(A1,A2,A3) ->
     cl:get_supported_image_formats(A1,A2,A3).
-create_image2d(A1,A2,A3,A4,A5,A6,A7) -> 
+create_image2d(A1,A2,A3,A4,A5,A6,A7) ->
     cl:create_image2d(A1,A2,A3,A4,A5,A6,A7).
-create_image3d(A1,A2,A3,A4,A5,A6,A7,A8,A9) -> 
+create_image3d(A1,A2,A3,A4,A5,A6,A7,A8,A9) ->
     cl:create_image3d(A1,A2,A3,A4,A5,A6,A7,A8,A9).
 create_sampler(A1,A2,A3,A4) -> cl:create_sampler(A1,A2,A3,A4).
 release_sampler(A1) -> cl:release_sampler(A1).
@@ -200,34 +200,34 @@ get_kernel_info(A1,A2) -> cl:get_kernel_info(A1,A2).
 kernel_workgroup_info() -> cl:kernel_workgroup_info().
 get_kernel_workgroup_info(A1,A2) -> cl:get_kernel_workgroup_info(A1,A2).
 get_kernel_workgroup_info(A1,A2,A3) -> cl:get_kernel_workgroup_info(A1,A2,A3).
-enqueue_task(A1,A2,A3) -> cl:enqueue_task(A1,A2,A3). 
+enqueue_task(A1,A2,A3) -> cl:enqueue_task(A1,A2,A3).
 enqueue_task(A1,A2,A3,A4) -> cl:enqueue_task(A1,A2,A3,A4).
 nowait_enqueue_task(A1,A2,A3) -> cl:nowait_enqueue_task(A1,A2,A3).
-enqueue_nd_range_kernel(A1,A2,A3,A4,A5) -> 
+enqueue_nd_range_kernel(A1,A2,A3,A4,A5) ->
     cl:enqueue_nd_range_kernel(A1,A2,A3,A4,A5).
-enqueue_nd_range_kernel(A1,A2,A3,A4,A5,A6) -> 
+enqueue_nd_range_kernel(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_nd_range_kernel(A1,A2,A3,A4,A5,A6).
-nowait_enqueue_nd_range_kernel(A1,A2,A3,A4,A5) -> 
+nowait_enqueue_nd_range_kernel(A1,A2,A3,A4,A5) ->
     cl:nowait_enqueue_nd_range_kernel(A1,A2,A3,A4,A5).
 enqueue_marker(A1) -> cl:enqueue_marker(A1).
 enqueue_barrier(A1) -> cl:enqueue_barrier(A1).
-enqueue_wait_for_events(A1,A2) -> 
+enqueue_wait_for_events(A1,A2) ->
     cl:enqueue_wait_for_events(A1,A2).
 enqueue_read_buffer(A1,A2,A3,A4,A5) ->
     cl:enqueue_read_buffer(A1,A2,A3,A4,A5).
-enqueue_write_buffer(A1,A2,A3,A4,A5,A6) -> 
+enqueue_write_buffer(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_write_buffer(A1,A2,A3,A4,A5,A6).
 enqueue_write_buffer(A1,A2,A3,A4,A5,A6,A7) ->
     cl:enqueue_write_buffer(A1,A2,A3,A4,A5,A6,A7).
-nowait_enqueue_write_buffer(A1,A2,A3,A4,A5,A6) -> 
+nowait_enqueue_write_buffer(A1,A2,A3,A4,A5,A6) ->
     cl:nowait_enqueue_write_buffer(A1,A2,A3,A4,A5,A6).
-enqueue_read_image(A1,A2,A3,A4,A5,A6,A7) -> 
+enqueue_read_image(A1,A2,A3,A4,A5,A6,A7) ->
     cl:enqueue_read_image(A1,A2,A3,A4,A5,A6,A7).
-enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8) -> 
+enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8) ->
     cl:enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8).
 enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8,A9) ->
     cl:enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8,A9).
-nowait_enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8) -> 
+nowait_enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8) ->
     cl:nowait_enqueue_write_image(A1,A2,A3,A4,A5,A6,A7,A8).
 enqueue_copy_image(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_copy_image(A1,A2,A3,A4,A5,A6).
@@ -235,20 +235,20 @@ enqueue_copy_image_to_buffer(A1,A2,A3,A4,A5,A6,A7) ->
     cl:enqueue_copy_image_to_buffer(A1,A2,A3,A4,A5,A6,A7).
 enqueue_copy_buffer_to_image(A1,A2,A3,A4,A5,A6,A7) ->
     cl:enqueue_copy_buffer_to_image(A1,A2,A3,A4,A5,A6,A7).
-enqueue_map_buffer(A1,A2,A3,A4,A5,A6) -> 
+enqueue_map_buffer(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_map_buffer(A1,A2,A3,A4,A5,A6).
-enqueue_map_image(A1,A2,A3,A4,A5,A6) -> 
+enqueue_map_image(A1,A2,A3,A4,A5,A6) ->
     cl:enqueue_map_image(A1,A2,A3,A4,A5,A6).
-enqueue_unmap_mem_object(A1,A2,A3) -> 
+enqueue_unmap_mem_object(A1,A2,A3) ->
     cl:enqueue_unmap_mem_object(A1,A2,A3).
 release_event(A1) -> cl:release_event(A1).
 retain_event(A1) -> cl:retain_event(A1).
 event_info() -> cl:event_info().
 get_event_info(A1) -> cl:get_event_info(A1).
 get_event_info(A1,A2) -> cl:get_event_info(A1,A2).
-wait(A1) -> cl:wait(A1). 
+wait(A1) -> cl:wait(A1).
 wait(A1,A2) -> cl:wait(A1,A2).
-async_flush(A1) -> cl:async_flush(A1). 
+async_flush(A1) -> cl:async_flush(A1).
 flush(A1) -> cl:flush(A1).
 async_finish(A1) -> cl:async_finish(A1).
 finish(A1) -> cl:finish(A1).

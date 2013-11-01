@@ -31,7 +31,7 @@ typedef struct {
     int (*cmp)(void*, void*);      // compare data items
     void (*release)(void*);        // data release (free)
     void* (*copy)(void*);          // copy (may be used with insert)
-} lhash_func_t;    
+} lhash_func_t;
 
 typedef struct {
     lhash_func_t func;         // functions
@@ -53,16 +53,16 @@ typedef struct {
 } lhash_t;
 
 extern lhash_t* lhash_new(char* name, int thres, lhash_func_t* func);
-extern lhash_t* lhash_init(lhash_t* lh, char* name, int thres, 
-			   lhash_func_t* func);
+extern lhash_t* lhash_init(lhash_t* lh, char* name, int thres,
+                           lhash_func_t* func);
 extern void  lhash_delete(lhash_t* lh);
 extern void* lhash_lookup(lhash_t* lh, void* key);
 extern void* lhash_insert(lhash_t* lh, void* key, void* data);
 extern void* lhash_insert_new(lhash_t* lh, void* key, void* data);
 extern void* lhash_erase(lhash_t* lh, void* key);
-extern void  lhash_each(lhash_t* lh, 
-			void (elem)(lhash_t* lh, void* elem, void* arg),
-			void* arg);
+extern void  lhash_each(lhash_t* lh,
+                        void (elem)(lhash_t* lh, void* elem, void* arg),
+                        void* arg);
 extern void lhash_Info(lhash_t* lh);
 
 #endif
