@@ -1421,7 +1421,7 @@ ecl_info_t device_info[] =
       OCL_ENUM, kv_device_partition_property },
 
     { &ATOM(partition_affinity_domain),
-      CL_DEVICE_PARTITION_AFFINITY_DOMAIN, false
+      CL_DEVICE_PARTITION_AFFINITY_DOMAIN, false,
       OCL_ENUM, kv_device_affinity_domain },
     // Property list / array , verify this!
     { &ATOM(partition_type),
