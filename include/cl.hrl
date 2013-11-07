@@ -47,11 +47,6 @@
 %% @type cl_half() = float()
 %% @type cl_float() = float()
 %% @type cl_double() = float()
-%% @type cl_scalar() = cl_char() |  cl_uchar() |
-%%                     cl_short() | cl_ushort() |
-%%                     cl_int() |   cl_uint() |
-%%                     cl_long() |  cl_ulong() |
-%%                     cl_half() | cl_float() | cl_double()
 
 
 -type cl_char() :: integer().
@@ -65,12 +60,6 @@
 -type cl_half() :: float().
 -type cl_float() :: float().
 -type cl_double() :: float().
-
--type cl_scalar() :: cl_char() |  cl_uchar() |
-                     cl_short() | cl_ushort() |
-                     cl_int() |   cl_uint() |
-                     cl_long() |  cl_ulong() |
-                     cl_half() | cl_float() | cl_double().
 
 -define(cl_char(X),     X:8/native-signed-integer).
 -define(cl_uchar(X),    X:8/native-unsigned-integer).
@@ -162,7 +151,7 @@
 
 -define(cl_float2(X1,X2), ?cl_float(X1), ?cl_float(X2)).
 -define(cl_float4(X1,X2,X3,X4),
-        ?cl_float2(X1,X2), ?cl_float(X3,X4)).
+        ?cl_float2(X1,X2), ?cl_float2(X3,X4)).
 -define(cl_float8(X1,X2,X3,X4,X5,X6,X7,X8),
         ?cl_float4(X1,X2,X3,X4), ?cl_float4(X5,X6,X7,X8)).
 -define(cl_float16(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10,X11,X12,X13,X14,X15,X16),
