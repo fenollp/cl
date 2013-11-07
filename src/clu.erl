@@ -24,7 +24,9 @@
 -export([setup/0, setup/1, teardown/1]).
 -export([context/1, device_list/1, device/1]).
 -export([build_source/2]).
+-export([build_source/3]).
 -export([build_binary/2]).
+-export([build_binary/3]).
 -export([build_source_file/2, compile_file/1]).
 -export([get_program_binaries/1]).
 -export([apply_kernel_args/2]).
@@ -107,15 +109,26 @@ device(E) ->
     hd(E#cl.devices).
 
 %%
-%% @doc Create and build a OpenCL program from a string.
+%% @doc Equivalent to build_source(E, Source, "").
 %%
 %% @spec build_source(E::clu_state(), Source::iodata()) ->
 %%   {'ok',cl_program()} | {'error',{cl_error(), Logs}}
 %%
 
-build_source(E, Source) ->
-    {ok,Program} = cl:create_program_with_source(E#cl.context,Source),
-    case cl:build_program(Program, E#cl.devices, "") of
+build_source (E, Source) ->
+    build_source(E, Source, "").
+
+%%
+%% @doc Create and build a OpenCL program from a string.
+%%   BuildOptions are described on section 5.4.3 of The OpenCL Specification.
+%%
+%% @spec build_source(E::clu_state(), Source::iodata(), BuildOptions::string()) ->
+%%   {'ok',cl_program()} | {'error',{cl_error(), Logs}}
+%%
+
+build_source (E, Source, BuildOptions) ->
+    {ok,Program} = cl:create_program_with_source(E#cl.context, Source),
+    case cl:build_program(Program, E#cl.devices, BuildOptions) of
         ok ->
             Status = [cl:get_program_build_info(Program, Dev, status)
                       || Dev <- E#cl.devices],
@@ -167,7 +180,7 @@ compile_file(File) ->
     Res.
 
 %% @doc Retrieve the binaries associated with a program build.
-%%  the binaries may be cached for later use with build_binary/2.
+%%  the binaries may be cached for later use with build_binary/2,3.
 %%
 %% @spec get_program_binaries(Program::cl_program()) ->
 %%  {ok,{[cl_device_id()],[binary()]}}
@@ -178,17 +191,20 @@ get_program_binaries(Program) ->
     {ok,BinaryList} = cl:get_program_info(Program, binaries),
     {ok,{DeviceList, BinaryList}}.
 
-get_program_logs(Program) ->
-    {ok,DeviceList} = cl:get_program_info(Program, devices),
-    map(fun(Device) ->
-                {ok,Log} = cl:get_program_build_info(Program,Device,log),
-                Log
-        end, DeviceList).
+get_program_logs (Program) ->
+    {ok,Devices} = cl:get_program_info(Program, devices),
+    [begin
+         {ok,Log} = cl:get_program_build_info(Program, Device, log),
+         Log
+     end || Device <- Devices].
 
 
-build_binary(E, {DeviceList,BinaryList}) ->
+build_binary (E, {DeviceList,BinaryList}) ->
+    build_binary (E, {DeviceList,BinaryList}, "").
+
+build_binary(E, {DeviceList,BinaryList}, BuildOptions) ->
     {ok,Program} = cl:create_program_with_binary(E#cl.context, DeviceList, BinaryList),
-    case cl:build_program(Program, DeviceList, "") of
+    case cl:build_program(Program, DeviceList, BuildOptions) of
         ok ->
             {ok,Program};
         Error ->
