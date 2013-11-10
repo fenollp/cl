@@ -1,6 +1,7 @@
 c_src/*.o
 ebin
 deps
+doc
 priv/cl_nif.so
 src/depend.mk
 
